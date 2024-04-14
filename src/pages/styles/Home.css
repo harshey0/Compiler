@@ -9,7 +9,7 @@
 
 .formWrapper{
     border-radius: 10px;
-    background-color: #222831;
+    background-color:black;
     padding: 20px;
     width: 450px;
     max-width: 90%;
@@ -56,12 +56,12 @@ footer{
     transition: all 0.1s ease-in-out;
 }
 .joinBtn{
-    background: #76ABAE;
+    background: #37B5B6;
     width: 100px;
     margin-left: auto;
 }
 .joinBtn:hover{
-    background: #37B5B6;
+    background: #025757;
 }
 
 .createInfo{
