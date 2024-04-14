@@ -45,6 +45,7 @@ footer{
     background: #eee;
     font-size: 16px;
     font-weight: bold;
+    color: black;
 }
 
 .btn{
@@ -55,11 +56,13 @@ footer{
     cursor: pointer;
     transition: all 0.1s ease-in-out;
 }
+
 .joinBtn{
     background: #37B5B6;
     width: 100px;
     margin-left: auto;
 }
+
 .joinBtn:hover{
     background: #025757;
 }

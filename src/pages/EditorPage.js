@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles/EditorPage.css";
 import Client from "../components/Client";
-
+import  Editor  from "../components/Editor";
 const EditorPage = () => {
   {
     const [clients, setClients] = useState([
@@ -14,6 +14,7 @@ const EditorPage = () => {
         username: "Harshit",
       },
     ]);
+    const x = "Chirag Punia";
     return (
       <>
         <div className="mainWrap">
@@ -24,14 +25,17 @@ const EditorPage = () => {
               </div>
               <h3>Connected</h3>
               <div className="clientList">
-              <Client  props={"Chirag Punia"} />
-                {clients.map((client) => {
-                  <Client key={client.socketId} props={client.username} />;
-                })}
+                {clients.map((client) => (
+                  <Client key={client.socketId} props={client.username} />
+                ))}
               </div>
             </div>
+            <button className="btn copyBtn">Copy Room ID</button>
+            <button className="btn leaveBtn"> Leave</button>
           </div>
-          <div className="editorWrap">Editor Goes here ....</div>
+          <div className="editorWrap">
+            <Editor />
+          </div>
         </div>
       </>
     );
