@@ -11,8 +11,9 @@ const EditorPage = () => {
   {
     const socketRef = useRef(null);
     const location = useLocation();
+    const codeRef = useRef(null);
     const reactNavigator = useNavigate();
-    const { roomId } = useParams();
+    const { roomID } = useParams();
     const [clients, setClients] = useState([]);
     const handleError = (err) => {
       console.log(err);
@@ -30,7 +31,7 @@ const EditorPage = () => {
           handleError(err);
         });
         socketRef.current.emit(ACTIONS.JOIN, {
-          roomId: roomId,
+          roomID: roomID,
           username: location.state.username,
         });
 
@@ -41,6 +42,10 @@ const EditorPage = () => {
               toast.success(`${username} joined the room.`);
             }
             setClients(clients);
+            socketRef.current.emit(ACTIONS.SYNC_CODE, {
+              code: codeRef.current,
+              socketId,
+            });
           }
         );
         socketRef.current.on(ACTIONS.DISCONNECTED, ({ socketId, username }) => {
@@ -58,6 +63,21 @@ const EditorPage = () => {
         socketRef.current.off(ACTIONS.DISCONNECTED);
       };
     }, []);
+    async function copyRoomId() {
+      try {
+        await navigator.clipboard.writeText(roomID);
+        toast.success("Room ID has been copied to your clipboard");
+      } catch (err) {
+        toast.error("Could not copy the Room ID");
+        console.error(err);
+      }
+    }
+
+    function leaveRoom() {
+      reactNavigator("/");
+    }
+
+  
 
     return (
       <>
@@ -74,11 +94,22 @@ const EditorPage = () => {
                 ))}
               </div>
             </div>
-            <button className="btn copyBtn">Copy Room ID</button>
-            <button className="btn leaveBtn"> Leave</button>
+            <button className="btn copyBtn" onClick={copyRoomId}>
+              Copy Room ID
+            </button>
+            <button className="btn leaveBtn" onClick={leaveRoom}>
+              {" "}
+              Leave
+            </button>
           </div>
           <div className="editorWrap">
-            <Editor socketRef={socketRef} roomId={roomId} />
+            <Editor
+              socketRef={socketRef}
+              roomID={roomID}
+              onCodeChange={(code) => {
+                codeRef.current = code;
+              }}
+            />
           </div>
         </div>
       </>

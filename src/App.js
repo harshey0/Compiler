@@ -21,7 +21,7 @@ export default class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/editor/:roomId" element={<EditorPage />} />
+            <Route path="/editor/:roomID" element={<EditorPage />} />
           </Routes>
         </BrowserRouter>
       </>
