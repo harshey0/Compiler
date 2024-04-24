@@ -3,12 +3,7 @@ import "./styles/EditorPage.css";
 import Client from "../components/Client";
 import Editor from "../components/Editor";
 import { initSocket } from "../socket";
-import {
-  useLocation,
-  useNavigate,
-  Navigate,
-  useParams,
-} from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import ACTIONS from "../Actions";
 
@@ -83,7 +78,7 @@ const EditorPage = () => {
             <button className="btn leaveBtn"> Leave</button>
           </div>
           <div className="editorWrap">
-            <Editor />
+            <Editor socketRef={socketRef} roomId={roomId} />
           </div>
         </div>
       </>
